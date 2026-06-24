@@ -1,0 +1,13 @@
+<Project>
+  <!--
+    Point Typedown.XamlUI's build tools (mt.exe / makepri.exe) at the Windows SDK
+    that is actually installed on this machine (10.0.26100.0 / Win11 24H2).
+    The package's .targets only probes 10.0.22000.0, 10.0.19041.0 and 10.0.18362.0,
+    none of which are installed here. Because these properties are set before the
+    package targets run, their `!Exists(...)` conditions see valid paths and won't override.
+  -->
+  <PropertyGroup>
+    <ManifestTool Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.26100.0\x86\mt.exe')">$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.26100.0\x86\mt.exe</ManifestTool>
+    <MakePri Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.26100.0\x86\makepri.exe')">$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.26100.0\x86\makepri.exe</MakePri>
+  </PropertyGroup>
+</Project>
