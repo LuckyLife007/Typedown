@@ -55,7 +55,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Resources\Statics\**" CopyToOutputDirectory="Always" Link="Resources\Statics\%(RecursiveDir)\%(Filename)%(Extension)" />
+		<None Include="Resources\Statics\**" CopyToOutputDirectory="Always" Link="Resources\Statics\%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<!--
+		WinUI 2 (Microsoft.UI.Xaml) and Win2D (Microsoft.Graphics.Canvas) native runtime DLLs.
+		These ship only for the win10-x64 RID and get dropped when the packaging project
+		republishes to win-x64, causing a 0x8007007E module-not-found crash on launch.
+		Stage them explicitly so they always land next to the executable in the package.
+	-->
+	<ItemGroup>
+		<Content Include="NativeRuntime\Microsoft.UI.Xaml.dll" CopyToOutputDirectory="PreserveNewest" Link="Microsoft.UI.Xaml.dll" />
+		<Content Include="NativeRuntime\Microsoft.Graphics.Canvas.dll" CopyToOutputDirectory="PreserveNewest" Link="Microsoft.Graphics.Canvas.dll" />
 	</ItemGroup>
 
 	<ItemGroup>
